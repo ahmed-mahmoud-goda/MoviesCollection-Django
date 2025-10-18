@@ -1,0 +1,34 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ movie.name }} - Details</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="detail-container">
+    <a href="{% url 'my-movies' %}" class="back-button">← Back to Movies</a>
+
+    <div class="detail-card">
+      <img src="{{ movie.image }}" alt="{{ movie.name }}" class="detail-image">
+      <div class="detail-info">
+        <h1 class="detail-title">{{ movie.name }}</h1>
+        <p><strong>Release Date:</strong> {{ movie.released }}</p>
+        <p><strong>Category:</strong> {{ movie.category }}</p>
+        <p><strong>Description:</strong> {{ movie.description }}</p>
+        
+        <div class="button-group">
+          <a href="{% url 'movie-edit' movie.id %}" class="btn update-btn">Update</a>
+          
+          <form method="POST" action="{% url 'movie-delete' movie.id %}" class="delete-form">
+            {% csrf_token %}
+            <button type="submit" class="btn delete-btn">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

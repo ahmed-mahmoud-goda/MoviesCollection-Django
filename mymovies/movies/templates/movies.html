@@ -1,0 +1,35 @@
+<!-- index.html -->
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Page</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Movie Collection</h1>
+      <a  class="add-btn" href="{% url 'movie-create' %}">+ Add New Movie</a>
+    </div>
+
+    {% for movie in movies %}
+    <a href="{% url 'movie-details' movie.id %}" class="movie-link">
+    <div class="movie-card">
+      <img src="{{ movie.image }}" alt="{{ movie.name }}" class='detail-image'>
+      <div class="movie-info">
+        <h2 class="movie-name">{{movie.name}}</h2>
+        <p class="movie-date">Release Date: {{movie.released}}</p>
+        <p class="movie-category">Category: {{movie.category}}</p>
+      </div>
+    </div>  
+  </a>
+    {% endfor %}
+    
+
+  </div>
+</body>
+</html>
+
